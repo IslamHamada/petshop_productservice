@@ -1,10 +1,10 @@
-package com.islamhamada.petshop.ProductService;
+package com.islamhamada.petshop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProductServiceApplicationTests {
+class ProductServiceTests {
 
 	@Test
 	void contextLoads() {

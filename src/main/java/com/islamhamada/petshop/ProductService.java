@@ -1,13 +1,13 @@
-package com.islamhamada.petshop.ProductService;
+package com.islamhamada.petshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProductServiceApplication {
+public class ProductService {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProductServiceApplication.class, args);
+		SpringApplication.run(ProductService.class, args);
 	}
 
 }
