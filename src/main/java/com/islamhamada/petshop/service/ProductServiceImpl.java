@@ -1,0 +1,29 @@
+package com.islamhamada.petshop.service;
+
+import com.islamhamada.petshop.entity.Product;
+import com.islamhamada.petshop.model.ProductRequest;
+import com.islamhamada.petshop.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ProductServiceImpl implements ProductService{
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public Product createProduct(ProductRequest productRequest) {
+        Product product = Product.builder()
+                .name(productRequest.getName())
+                .build();
+        return productRepository.save(product);
+    }
+}
