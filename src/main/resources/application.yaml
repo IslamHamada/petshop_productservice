@@ -12,6 +12,11 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-atfpp36qj24tzo8l.us.auth0.com/
 
 server:
   port: 8083
