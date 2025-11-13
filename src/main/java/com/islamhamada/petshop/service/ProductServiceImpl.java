@@ -1,9 +1,11 @@
 package com.islamhamada.petshop.service;
 
 import com.islamhamada.petshop.entity.Product;
+import com.islamhamada.petshop.exception.ProductServiceException;
 import com.islamhamada.petshop.model.ProductRequest;
 import com.islamhamada.petshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,5 +27,12 @@ public class ProductServiceImpl implements ProductService{
                 .name(productRequest.getName())
                 .build();
         return productRepository.save(product);
+    }
+
+    @Override
+    public Product getProductById(long id) {
+        return productRepository.findById(id).orElseThrow(() ->
+                new ProductServiceException("No product with given id: " + id
+                        , 404, HttpStatus.NOT_FOUND));
     }
 }
