@@ -41,4 +41,11 @@ public class ProductServiceImpl implements ProductService{
                 .quantity(product.getQuantity())
                 .build();
     }
+
+    @Override
+    public void reduceProductQuantity(long product_id, int amount) {
+        Product product = productRepository.findById(product_id).get();
+        product.setQuantity(product.getQuantity() - amount);
+        productRepository.save(product);
+    }
 }

@@ -31,4 +31,10 @@ public class ProductController {
         ProductDTO product = productService.getProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
+
+    @PutMapping("/{product_id}")
+    public ResponseEntity<Void> reduceProductQuantity(@PathVariable("product_id") long product_id, @RequestBody ReductQuantityRequest request) {
+        productService.reduceProductQuantity(product_id, request.getAmount());
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 }
