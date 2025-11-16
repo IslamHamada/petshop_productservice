@@ -1,5 +1,6 @@
 package com.islamhamada.petshop.service;
 
+import com.islamhamada.petshop.contracts.ProductDTO;
 import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.exception.ProductServiceException;
 import com.islamhamada.petshop.model.ProductRequest;
@@ -30,9 +31,14 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product getProductById(long id) {
-        return productRepository.findById(id).orElseThrow(() ->
+    public ProductDTO getProductById(long id) {
+        Product product = productRepository.findById(id).orElseThrow(() ->
                 new ProductServiceException("No product with given id: " + id
                         , 404, HttpStatus.NOT_FOUND));
+        return ProductDTO.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .quantity(product.getQuantity())
+                .build();
     }
 }

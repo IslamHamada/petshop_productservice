@@ -1,5 +1,6 @@
 package com.islamhamada.petshop.service;
 
+import com.islamhamada.petshop.contracts.ProductDTO;
 import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.model.ProductRequest;
 import com.islamhamada.petshop.repository.ProductRepository;
@@ -12,5 +13,5 @@ public interface ProductService {
 
     List<Product> getAllProducts();
     Product createProduct(ProductRequest productRequest);
-    Product getProductById(long id);
+    ProductDTO getProductById(long id);
 }
