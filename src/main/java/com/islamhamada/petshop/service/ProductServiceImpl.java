@@ -39,6 +39,11 @@ public class ProductServiceImpl implements ProductService{
                 .id(product.getId())
                 .name(product.getName())
                 .quantity(product.getQuantity())
+                .description(product.getDescription())
+                .image(product.getImage())
+                .for_animal(product.getForAnimal())
+                .utility(product.getUtility())
+                .price(product.getPrice())
                 .build();
     }
 
