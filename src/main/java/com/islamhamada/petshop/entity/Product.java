@@ -21,4 +21,13 @@ public class Product {
     private int quantity;
 
     private double price;
+
+    private String description;
+
+    private String image;
+
+    @Column(name = "for_animal")
+    private String forAnimal;
+
+    private String utility;
 }
