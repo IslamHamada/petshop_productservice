@@ -2,6 +2,7 @@ package com.islamhamada.petshop.controller;
 
 import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.model.ProductRequest;
+import com.islamhamada.petshop.model.ReduceQuantityRequest;
 import com.islamhamada.petshop.service.ProductService;
 import com.islamhamada.petshop.contracts.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
