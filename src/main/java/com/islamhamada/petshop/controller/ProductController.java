@@ -7,6 +7,7 @@ import com.islamhamada.petshop.contracts.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +24,12 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @PreAuthorize("hasAnyRole('Admin')")
     @PostMapping
-    public Product createProduct(@RequestBody ProductRequest productRequest) {
-        return productService.createProduct(productRequest);
+    public String createProduct(@RequestBody ProductRequest productRequest) {
+        return productService.createProduct(productRequest).toString();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") long id){
         ProductDTO product = productService.getProductById(id);
