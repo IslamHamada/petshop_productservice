@@ -50,4 +50,9 @@ public class ProductController {
         return new ResponseEntity<>(utilities, HttpStatus.OK);
     }
 
+    @GetMapping("/for_animals")
+    public ResponseEntity<List<String>> getForAnimals(){
+        List<String> utilities = productService.getForAnimals();
+        return new ResponseEntity<>(utilities, HttpStatus.OK);
+    }
 }
