@@ -50,4 +50,14 @@ public class ProductServiceImpl implements ProductService{
         product.setQuantity(product.getQuantity() - amount);
         productRepository.save(product);
     }
+
+    @Override
+    public List<String> getUtilities() {
+        return productRepository.getDistinctUtilities();
+    }
+
+    @Override
+    public List<String> getForAnimals() {
+        return productRepository.getDistinctForAnimals();
+    }
 }
