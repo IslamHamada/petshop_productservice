@@ -5,7 +5,6 @@ import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.model.ProductRequest;
 import com.islamhamada.petshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
