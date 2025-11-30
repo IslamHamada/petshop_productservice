@@ -42,4 +42,11 @@ public class ProductController {
         productService.reduceProductQuantity(product_id, request.getAmount());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
+    @GetMapping("/utilities")
+    public ResponseEntity<List<String>> getUtilities(){
+        List<String> utilities = productService.getUtilities();
+        return new ResponseEntity<>(utilities, HttpStatus.OK);
+    }
+
 }

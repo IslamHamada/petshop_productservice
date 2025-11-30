@@ -15,4 +15,6 @@ public interface ProductService {
     Product createProduct(ProductRequest productRequest);
     ProductDTO getProductById(long id);
     void reduceProductQuantity(long product_id, int amount);
+    List<String> getUtilities();
+    List<String> getForAnimals();
 }
