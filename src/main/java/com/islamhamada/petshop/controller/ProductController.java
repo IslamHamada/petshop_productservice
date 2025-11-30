@@ -5,6 +5,7 @@ import com.islamhamada.petshop.model.ProductRequest;
 import com.islamhamada.petshop.model.ReduceQuantityRequest;
 import com.islamhamada.petshop.service.ProductService;
 import com.islamhamada.petshop.contracts.ProductDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class ProductController {
 
     @PreAuthorize("hasAnyRole('Admin')")
     @PostMapping
-    public String createProduct(@RequestBody ProductRequest productRequest) {
+    public String createProduct(@Valid @RequestBody ProductRequest productRequest) {
         return productService.createProduct(productRequest).toString();
     }
 
