@@ -1,6 +1,6 @@
 package com.islamhamada.petshop.service;
 
-import com.islamhamada.petshop.contracts.ProductDTO;
+import com.islamhamada.petshop.contracts.dto.ProductDTO;
 import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.model.ProductRequest;
 import com.islamhamada.petshop.repository.ProductRepository;
@@ -17,8 +17,22 @@ public class ProductServiceImpl implements ProductService{
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductDTO> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDTO> productDTOS = products.stream().map(product -> {
+            ProductDTO productDTO = ProductDTO.builder()
+                    .name(product.getName())
+                    .id(product.getId())
+                    .price(product.getPrice())
+                    .image(product.getImage())
+                    .description(product.getDescription())
+                    .for_animal(product.getForAnimal())
+                    .utility(product.getUtility())
+                    .quantity(product.getQuantity())
+                    .build();
+            return productDTO;
+        }).toList();
+        return productDTOS;
     }
 
     @Override
