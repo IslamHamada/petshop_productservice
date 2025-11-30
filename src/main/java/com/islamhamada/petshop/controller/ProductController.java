@@ -4,7 +4,7 @@ import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.model.ProductRequest;
 import com.islamhamada.petshop.model.ReduceQuantityRequest;
 import com.islamhamada.petshop.service.ProductService;
-import com.islamhamada.petshop.contracts.ProductDTO;
+import com.islamhamada.petshop.contracts.dto.ProductDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
