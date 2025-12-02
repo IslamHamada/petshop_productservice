@@ -38,6 +38,10 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product createProduct(ProductRequest productRequest) {
+        if(productRepository.findByName(productRequest.getName()).isPresent())
+            throw new ProductServiceException("NAME_ALREADY_EXISTS",
+                    "A product already exists with name: " + productRequest.getName(),
+                    HttpStatus.CONFLICT);
         Product product = Product.builder()
                 .name(productRequest.getName())
                 .build();
