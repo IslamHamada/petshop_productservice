@@ -36,6 +36,10 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product createProduct(ProductRequest productRequest) {
+        if(productRepository.findByName(productRequest.getName()).isPresent())
+            throw new ProductServiceException("NAME_ALREADY_EXISTS",
+                    "A product already exists with name: " + productRequest.getName(),
+                    HttpStatus.CONFLICT);
         Product product = Product.builder()
                 .name(productRequest.getName())
                 .build();
@@ -44,7 +48,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public ProductDTO getProductById(long id) {
-        Product product = productRepository.findById(id).get();
+        Product product = productRepository.findById(id).orElseThrow(() ->
+                new ProductServiceException("NOT_FOUND", "Product not found with id: " + id, HttpStatus.NOT_FOUND)
+        );
         return ProductDTO.builder()
                 .id(product.getId())
                 .name(product.getName())
@@ -59,7 +65,13 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void reduceProductQuantity(long product_id, int amount) {
-        Product product = productRepository.findById(product_id).get();
+        Product product = productRepository.findById(product_id).orElseThrow(() ->
+                new ProductServiceException("NOT_FOUND", "Product not found with id: " + product_id, HttpStatus.NOT_FOUND)
+        );
+        if(amount > product.getQuantity())
+            throw new ProductServiceException("QUANTITY_ERROR",
+                    "A product can't have a negative quantity. Amount of:" + amount + " is too high for product with id: " + product_id,
+                    HttpStatus.CONFLICT);
         product.setQuantity(product.getQuantity() - amount);
         productRepository.save(product);
     }
