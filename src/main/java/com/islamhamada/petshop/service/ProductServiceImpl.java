@@ -66,6 +66,10 @@ public class ProductServiceImpl implements ProductService{
         Product product = productRepository.findById(product_id).orElseThrow(() ->
                 new ProductServiceException("NOT_FOUND", "Product not found with id: " + product_id, HttpStatus.NOT_FOUND)
         );
+        if(amount > product.getQuantity())
+            throw new ProductServiceException("QUANTITY_ERROR",
+                    "A product can't have a negative quantity. Amount of:" + amount + " is too high for product with id: " + product_id,
+                    HttpStatus.CONFLICT);
         product.setQuantity(product.getQuantity() - amount);
         productRepository.save(product);
     }
