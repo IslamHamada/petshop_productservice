@@ -6,6 +6,7 @@ import com.islamhamada.petshop.model.ReduceQuantityRequest;
 import com.islamhamada.petshop.service.ProductService;
 import com.islamhamada.petshop.contracts.dto.ProductDTO;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,13 +34,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") long id){
+    public ResponseEntity<ProductDTO> getProductById(@Positive @PathVariable("id") long id){
         ProductDTO product = productService.getProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PutMapping("/{product_id}")
-    public ResponseEntity<Void> reduceProductQuantity(@PathVariable("product_id") long product_id, @Valid @RequestBody ReduceQuantityRequest request) {
+    public ResponseEntity<Void> reduceProductQuantity(@Positive @PathVariable("product_id") long product_id, @Valid @RequestBody ReduceQuantityRequest request) {
         productService.reduceProductQuantity(product_id, request.getAmount());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
