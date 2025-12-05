@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService{
         if(productRepository.findByName(productRequest.getName()).isPresent())
             throw new ProductServiceException(
                     "A product already exists with name: " + productRequest.getName(),
-                    "NAME_ALREADY_EXISTS", HttpStatus.CONFLICT);
+                    "NAME_ALREADY_TAKEN", HttpStatus.CONFLICT);
         Product product = Product.builder()
                 .name(productRequest.getName())
                 .build();
@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService{
         );
         if(amount > product.getQuantity())
             throw new ProductServiceException(
-                    "A product can't have a negative quantity. Amount of:" + amount + " is too high for product with id: " + product_id,
+                    "A product can't have a negative quantity. Amount of " + amount + " is too high for product with id: " + product_id,
                     "QUANTITY_ERROR", HttpStatus.CONFLICT);
         product.setQuantity(product.getQuantity() - amount);
         productRepository.save(product);
