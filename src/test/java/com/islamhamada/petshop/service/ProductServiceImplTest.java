@@ -99,9 +99,9 @@ class ProductServiceImplTest {
             verify(productRepository, times(1)).findByName(anyString());
             verify(productRepository, times(0)).save(any());
 
-            assertEquals(exception.getMessage(), "A product already exists with name: " + mockProduct.getName());
-            assertEquals(exception.getError_code(), "PRODUCT_NAME_ALREADY_TAKEN");
-            assertEquals(exception.getHttpStatus(), HttpStatus.CONFLICT);
+            assertEquals("A product already exists with name: " + mockProduct.getName(), exception.getMessage());
+            assertEquals("PRODUCT_NAME_ALREADY_TAKEN", exception.getError_code());
+            assertEquals(HttpStatus.CONFLICT, exception.getHttpStatus());
         }
     }
 
@@ -142,9 +142,9 @@ class ProductServiceImplTest {
 
             verify(productRepository, times(1)).findById(anyLong());
 
-            assertEquals(exception.getHttpStatus(), HttpStatus.NOT_FOUND);
-            assertEquals(exception.getError_code(), "PRODUCT_NOT_FOUND");
-            assertEquals(exception.getMessage(), "Product not found with id: " + id);
+            assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+            assertEquals("PRODUCT_NOT_FOUND", exception.getError_code());
+            assertEquals("Product not found with id: " + id, exception.getMessage());
         }
     }
 
@@ -188,9 +188,9 @@ class ProductServiceImplTest {
             verify(productRepository, times(0))
                     .save(any());
 
-            assertEquals(exception.getMessage(), "Product not found with id: " + id);
-            assertEquals(exception.getError_code(), "PRODUCT_NOT_FOUND");
-            assertEquals(exception.getHttpStatus(), HttpStatus.NOT_FOUND);
+            assertEquals("Product not found with id: " + id, exception.getMessage());
+            assertEquals("PRODUCT_NOT_FOUND", exception.getError_code());
+            assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
         }
 
         @DisplayName("failure 2")
@@ -212,8 +212,8 @@ class ProductServiceImplTest {
 
             assertEquals(exception.getMessage(), "A product can't have a negative quantity. " +
                     "Amount of " + amount + " is too high for product with id: " + mockProduct.getId());
-            assertEquals(exception.getError_code(), "PRODUCT_QUANTITY_ERROR");
-            assertEquals(exception.getHttpStatus(), HttpStatus.CONFLICT);
+            assertEquals("PRODUCT_QUANTITY_ERROR", exception.getError_code());
+            assertEquals(HttpStatus.CONFLICT, exception.getHttpStatus());
         }
     }
 
