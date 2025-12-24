@@ -5,6 +5,7 @@ import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.exception.ProductServiceException;
 import com.islamhamada.petshop.model.ProductRequest;
 import com.islamhamada.petshop.repository.ProductRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Log4j2
 public class ProductServiceImpl implements ProductService{
 
     @Autowired
@@ -19,6 +21,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<ProductDTO> getAllProducts() {
+        log.info("Getting all products");
         List<Product> products = productRepository.findAll();
         List<ProductDTO> productDTOS = products.stream().map(product -> {
             ProductDTO productDTO = ProductDTO.builder()
@@ -33,11 +36,13 @@ public class ProductServiceImpl implements ProductService{
                     .build();
             return productDTO;
         }).toList();
+        log.info("All products fetched successfully");
         return productDTOS;
     }
 
     @Override
     public Product createProduct(ProductRequest productRequest) {
+        log.info("Creating product with name: " + productRequest.getName());
         if(productRepository.findByName(productRequest.getName()).isPresent())
             throw new ProductServiceException(
                     "A product already exists with name: " + productRequest.getName(),
@@ -45,14 +50,18 @@ public class ProductServiceImpl implements ProductService{
         Product product = Product.builder()
                 .name(productRequest.getName())
                 .build();
-        return productRepository.save(product);
+        Product rv = productRepository.save(product);
+        log.info("Product successfully created with name: " + productRequest.getName() + " and id: " + rv.getId());
+        return rv;
     }
 
     @Override
     public ProductDTO getProductById(long id) {
+        log.info("Getting product by id: " + id);
         Product product = productRepository.findById(id).orElseThrow(() ->
                 new ProductServiceException("Product not found with id: " + id, "NOT_FOUND", HttpStatus.NOT_FOUND)
         );
+        log.info("Product with id: " + id + " successfully fetched");
         return ProductDTO.builder()
                 .id(product.getId())
                 .name(product.getName())
@@ -67,6 +76,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void reduceProductQuantity(long product_id, int amount) {
+        log.info("Reducing amount of product with id: " + product_id + "by: " + amount);
         Product product = productRepository.findById(product_id).orElseThrow(() ->
                 new ProductServiceException("Product not found with id: " + product_id, "NOT_FOUND", HttpStatus.NOT_FOUND)
         );
@@ -76,15 +86,22 @@ public class ProductServiceImpl implements ProductService{
                     "QUANTITY_ERROR", HttpStatus.CONFLICT);
         product.setQuantity(product.getQuantity() - amount);
         productRepository.save(product);
+        log.info("Product's amount with id: " + product_id + " successfully reduced by " + amount);
     }
 
     @Override
     public List<String> getUtilities() {
-        return productRepository.getDistinctUtilities();
+        log.info("Getting utilities");
+        List<String> rv = productRepository.getDistinctUtilities();
+        log.info("Utilities successfully fetched");
+        return rv;
     }
 
     @Override
     public List<String> getForAnimals() {
-        return productRepository.getDistinctForAnimals();
+        log.info("Getting for_animals");
+        List<String> rv = productRepository.getDistinctForAnimals();
+        log.info("for_animals successfully fetched");
+        return rv;
     }
 }
