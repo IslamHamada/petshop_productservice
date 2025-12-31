@@ -1,6 +1,5 @@
 package com.islamhamada.petshop.controller;
 
-import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.model.ProductRequest;
 import com.islamhamada.petshop.model.ReduceQuantityRequest;
 import com.islamhamada.petshop.service.ProductService;
@@ -29,8 +28,8 @@ public class ProductController {
 
     @PreAuthorize("hasAnyRole('Admin')")
     @PostMapping
-    public String createProduct(@Valid @RequestBody ProductRequest productRequest) {
-        return productService.createProduct(productRequest).toString();
+    public ProductDTO createProduct(@Valid @RequestBody ProductRequest productRequest) {
+        return productService.createProduct(productRequest);
     }
 
     @GetMapping("/{id}")
