@@ -39,6 +39,7 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('Customer')")
     @PutMapping("/{product_id}")
     public ResponseEntity<Void> reduceProductQuantity(@PositiveOrZero @PathVariable("product_id") long product_id, @Valid @RequestBody ReduceQuantityRequest request) {
         productService.reduceProductQuantity(product_id, request.getAmount());
