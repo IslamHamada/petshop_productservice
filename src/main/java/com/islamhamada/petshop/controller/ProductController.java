@@ -6,7 +6,7 @@ import com.islamhamada.petshop.model.ReduceQuantityRequest;
 import com.islamhamada.petshop.service.ProductService;
 import com.islamhamada.petshop.contracts.dto.ProductDTO;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
