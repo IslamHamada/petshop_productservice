@@ -76,7 +76,7 @@ class ProductServiceImplTest {
             when(productRepository.save(any()))
                     .thenAnswer(invocation -> invocation.getArgument(0));
 
-            Product product = productService.createProduct(productRequest);
+            ProductDTO product = productService.createProduct(productRequest);
 
             verify(productRepository, times(1)).findByName(any());
             verify(productRepository, times(1)).save(any());

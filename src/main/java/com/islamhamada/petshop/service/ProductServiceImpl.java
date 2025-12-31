@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product createProduct(ProductRequest productRequest) {
+    public ProductDTO createProduct(ProductRequest productRequest) {
         log.info("Creating product with name: " + productRequest.getName());
         if(productRepository.findByName(productRequest.getName()).isPresent())
             throw new ProductServiceException(
@@ -51,8 +51,11 @@ public class ProductServiceImpl implements ProductService{
                 .name(productRequest.getName())
                 .build();
         Product rv = productRepository.save(product);
+        ProductDTO productDTO = ProductDTO.builder()
+                        .name(productRequest.getName())
+                        .build();
         log.info("Product successfully created with name: " + productRequest.getName() + " and id: " + rv.getId());
-        return rv;
+        return productDTO;
     }
 
     @Override

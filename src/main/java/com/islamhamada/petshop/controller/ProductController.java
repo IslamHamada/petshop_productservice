@@ -1,12 +1,11 @@
 package com.islamhamada.petshop.controller;
 
-import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.model.ProductRequest;
 import com.islamhamada.petshop.model.ReduceQuantityRequest;
 import com.islamhamada.petshop.service.ProductService;
 import com.islamhamada.petshop.contracts.dto.ProductDTO;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,18 +28,19 @@ public class ProductController {
 
     @PreAuthorize("hasAnyRole('Admin')")
     @PostMapping
-    public String createProduct(@Valid @RequestBody ProductRequest productRequest) {
-        return productService.createProduct(productRequest).toString();
+    public ProductDTO createProduct(@Valid @RequestBody ProductRequest productRequest) {
+        return productService.createProduct(productRequest);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@Positive @PathVariable("id") long id){
+    public ResponseEntity<ProductDTO> getProductById(@PositiveOrZero @PathVariable("id") long id){
         ProductDTO product = productService.getProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('Customer')")
     @PutMapping("/{product_id}")
-    public ResponseEntity<Void> reduceProductQuantity(@Positive @PathVariable("product_id") long product_id, @Valid @RequestBody ReduceQuantityRequest request) {
+    public ResponseEntity<Void> reduceProductQuantity(@PositiveOrZero @PathVariable("product_id") long product_id, @Valid @RequestBody ReduceQuantityRequest request) {
         productService.reduceProductQuantity(product_id, request.getAmount());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
