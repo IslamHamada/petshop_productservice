@@ -34,13 +34,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@Positive @PathVariable("id") long id){
+    public ResponseEntity<ProductDTO> getProductById(@PositiveOrZero @PathVariable("id") long id){
         ProductDTO product = productService.getProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PutMapping("/{product_id}")
-    public ResponseEntity<Void> reduceProductQuantity(@Positive @PathVariable("product_id") long product_id, @Valid @RequestBody ReduceQuantityRequest request) {
+    public ResponseEntity<Void> reduceProductQuantity(@PositiveOrZero @PathVariable("product_id") long product_id, @Valid @RequestBody ReduceQuantityRequest request) {
         productService.reduceProductQuantity(product_id, request.getAmount());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
