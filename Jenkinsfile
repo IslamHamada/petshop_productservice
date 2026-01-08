@@ -14,7 +14,7 @@ node {
     }
     stage('Checkout Product-Service'){
         checkout([$class: 'GitSCM',
-                  branches: [[name: '*/jenkins_gcp']],
+                  branches: [[name: '*/hetzner']],
                   userRemoteConfigs: [[credentialsId: 'git',
                                        url: 'https://github.com/IslamHamada/petshop_productservice.git']]])
     }
