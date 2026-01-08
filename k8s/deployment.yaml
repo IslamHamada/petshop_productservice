@@ -15,7 +15,7 @@ spec:
         - name: dockerhub-secret
       containers:
         - name: product-service-app
-          image: IMAGE_URL/TAG
+          image: IMAGE_URL:TAG
           imagePullPolicy: Always
           resources:
             limits:
