@@ -155,8 +155,8 @@
                         <image>eclipse-temurin:17-jdk</image>
                     </from>
                     <to>
-                        <image>${REPO_URL}:product-service</image>
-                        <tags>${VERSION}</tags>
+                        <image>${REPO_URL}</image>
+                        <tags>product-service-${VERSION}</tags>
                     </to>
                 </configuration>
             </plugin>
