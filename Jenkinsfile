@@ -23,7 +23,7 @@ node {
     }
     stage('SonarQube analysis'){
         withSonarQubeEnv('Sonar') {
-            sh("${mvnCMD} sonar:sonar")
+            sh("${mvnCMD} org.sonarsource.scanner.maven:sonar-maven-plugin:sonar")
         }
     }
     stage('Quality gate') {
