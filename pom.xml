@@ -30,7 +30,11 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2025.0.0</spring-cloud.version>
         <dockerhub-repo>registry-1.docker.io/islamhamada/petshop</dockerhub-repo>
-	</properties>
+	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.language>java</sonar.language>
+    </properties>
 	<dependencies>
         <dependency>
             <groupId>com.islamhamada.petshop</groupId>
@@ -159,6 +163,26 @@
                         <tags>product-service-${VERSION}</tags>
                     </to>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.14</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/islamhamada/petshop/**/exception/*</exclude>
+                        <exclude>com/islamhamada/petshop/**/entity/*</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 		</plugins>
 	</build>
