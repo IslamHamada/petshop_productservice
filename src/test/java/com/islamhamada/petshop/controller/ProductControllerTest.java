@@ -8,7 +8,7 @@ import com.islamhamada.petshop.contracts.dto.ProductDTO;
 import com.islamhamada.petshop.contracts.model.RestExceptionResponse;
 import com.islamhamada.petshop.entity.Product;
 import com.islamhamada.petshop.model.ProductRequest;
-import com.islamhamada.petshop.model.ReduceQuantityRequest;
+import com.islamhamada.petshop.contracts.model.ReduceQuantityRequest;
 import com.islamhamada.petshop.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
