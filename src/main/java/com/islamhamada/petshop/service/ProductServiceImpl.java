@@ -78,7 +78,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void reduceProductQuantity(long product_id, int amount) {
+    public int reduceProductQuantity(long product_id, int amount) {
         log.info("Reducing amount of product with id: " + product_id + "by: " + amount);
         Product product = productRepository.findById(product_id).orElseThrow(() ->
                 new ProductServiceException("Product not found with id: " + product_id, "NOT_FOUND", HttpStatus.NOT_FOUND)
@@ -90,6 +90,7 @@ public class ProductServiceImpl implements ProductService{
         product.setQuantity(product.getQuantity() - amount);
         productRepository.save(product);
         log.info("Product's amount with id: " + product_id + " successfully reduced by " + amount);
+        return amount;
     }
 
     @Override

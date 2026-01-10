@@ -9,7 +9,7 @@ public interface ProductService {
     List<ProductDTO> getAllProducts();
     ProductDTO createProduct(ProductRequest productRequest);
     ProductDTO getProductById(long id);
-    void reduceProductQuantity(long product_id, int amount);
+    int reduceProductQuantity(long product_id, int amount);
     List<String> getUtilities();
     List<String> getForAnimals();
 }
