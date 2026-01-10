@@ -1,7 +1,7 @@
 package com.islamhamada.petshop.controller;
 
 import com.islamhamada.petshop.model.ProductRequest;
-import com.islamhamada.petshop.model.ReduceQuantityRequest;
+import com.islamhamada.petshop.contracts.model.ReduceQuantityRequest;
 import com.islamhamada.petshop.service.ProductService;
 import com.islamhamada.petshop.contracts.dto.ProductDTO;
 import jakarta.validation.Valid;
