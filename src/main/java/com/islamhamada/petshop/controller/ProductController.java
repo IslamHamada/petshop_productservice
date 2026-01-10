@@ -40,9 +40,9 @@ public class ProductController {
 
     @PreAuthorize("hasAnyRole('Customer')")
     @PutMapping("/{product_id}")
-    public ResponseEntity<Void> reduceProductQuantity(@PositiveOrZero @PathVariable("product_id") long product_id, @Valid @RequestBody ReduceQuantityRequest request) {
+    public ResponseEntity reduceProductQuantity(@PositiveOrZero @PathVariable("product_id") long product_id, @Valid @RequestBody ReduceQuantityRequest request) {
         productService.reduceProductQuantity(product_id, request.getAmount());
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/utilities")
