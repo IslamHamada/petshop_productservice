@@ -1,6 +1,10 @@
 # Product Service
 
-A microservice for managing product reviews and ratings in the PetShop ecosystem.
+Provides product catalog data for the PetShop platform.
+
+## Description
+A Spring Boot microservice responsible for storing and serving product information.  
+It is an independent service and does not depend on other microservices.
 
 ## Tech Stack
 - Java 17  
