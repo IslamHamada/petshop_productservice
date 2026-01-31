@@ -11,10 +11,10 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query("select distinct utility from Product")
+    @Query("select distinct utility from product")
     public List<String> getDistinctUtilities();
 
-    @Query("select distinct forAnimal from Product")
+    @Query("select distinct forAnimal from product")
     public List<String> getDistinctForAnimals();
 
     public Optional<Product> findByName(String name);
