@@ -2,6 +2,7 @@ package com.islamhamada.petshop.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.math.BigDecimal;
 
 @Entity(name = "product")
 @Data
@@ -19,7 +20,7 @@ public class Product {
 
     private int quantity;
 
-    private double price;
+    private BigDecimal price;
 
     private String description;
 

@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -265,7 +266,7 @@ class ProductServiceImplTest {
         return Product.builder()
                 .id(1)
                 .name("name")
-                .price(1.0)
+                .price(BigDecimal.valueOf(1.0))
                 .quantity(5)
                 .description("description")
                 .image("image")
@@ -279,7 +280,7 @@ class ProductServiceImplTest {
                 .id(1)
                 .name("product 1")
                 .description("description 1")
-                .price(1)
+                .price(BigDecimal.valueOf(1))
                 .quantity(1)
                 .forAnimal("for_animal 1")
                 .utility("utility 1")
@@ -288,7 +289,7 @@ class ProductServiceImplTest {
                 .id(2)
                 .name("product 2")
                 .description("description 2")
-                .price(2)
+                .price(BigDecimal.valueOf(2))
                 .quantity(2)
                 .forAnimal("for_animal 2")
                 .utility("utility 2")
