@@ -3,7 +3,7 @@ package com.islamhamada.petshop.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+@Entity(name = "product")
 @Data
 @Builder
 @AllArgsConstructor
