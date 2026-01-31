@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +82,7 @@ class ProductControllerTest {
 
             assertEquals(product.getId(), p1.getId());
             assertEquals(product.getName(), p1.getName());
-            assertEquals(product.getPrice(), p1.getPrice());
+            assertEquals(product.getPrice().doubleValue(), p1.getPrice().doubleValue());
             assertEquals(product.getUtility(), p1.getUtility());
             assertEquals(product.getForAnimal(), p1.getFor_animal());
             assertEquals(product.getImage(), p1.getImage());
@@ -90,7 +91,7 @@ class ProductControllerTest {
 
             assertEquals(product2.getId(), p2.getId());
             assertEquals(product2.getName(), p2.getName());
-            assertEquals(product2.getPrice(), p2.getPrice());
+            assertEquals(product2.getPrice().doubleValue(), p2.getPrice().doubleValue());
             assertEquals(product2.getUtility(), p2.getUtility());
             assertEquals(product2.getForAnimal(), p2.getFor_animal());
             assertEquals(product2.getImage(), p2.getImage());
@@ -179,7 +180,7 @@ class ProductControllerTest {
             ProductDTO productDTO = objectMapper.readValue(response, ProductDTO.class);
             assertEquals(product.getId(), productDTO.getId());
             assertEquals(product.getName(), productDTO.getName());
-            assertEquals(product.getPrice(), productDTO.getPrice());
+            assertEquals(product.getPrice().doubleValue(), productDTO.getPrice().doubleValue());
             assertEquals(product.getImage(), productDTO.getImage());
             assertEquals(product.getDescription(), productDTO.getDescription());
             assertEquals(product.getForAnimal(), productDTO.getFor_animal());
@@ -349,7 +350,7 @@ class ProductControllerTest {
     public Product getMockProduct() {
         Product product = Product.builder()
                 .name("name")
-                .price(100)
+                .price(BigDecimal.valueOf(100))
                 .description("description")
                 .forAnimal("animal")
                 .quantity(10)
@@ -362,7 +363,7 @@ class ProductControllerTest {
     public Product getMockProduct2() {
         Product product = Product.builder()
                 .name("name2")
-                .price(200)
+                .price(BigDecimal.valueOf(200))
                 .description("description2")
                 .forAnimal("animal2")
                 .quantity(20)
